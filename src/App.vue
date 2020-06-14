@@ -1,12 +1,47 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <br />
+    <b-container>
+      <b-nav tabs>
+        <b-nav-item to="/" v-bind:active="'home' === navActive()" @click="clickNav('home')">Home</b-nav-item>
+        <b-nav-item
+          to="/onAir"
+          v-bind:active="'onAir' === navActive()"
+          @click="clickNav('onAir')"
+        >On-Air</b-nav-item>
+        <b-nav-item
+          to="/ended"
+          v-bind:active="'ended' === navActive()"
+          @click="clickNav('ended')"
+        >Ended</b-nav-item>
+        <b-nav-item
+          to="/movie"
+          v-bind:active="'movie' === navActive()"
+          @click="clickNav('movie')"
+        >Movie</b-nav-item>
+      </b-nav>
+      <router-view />
+    </b-container>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      nav: "home"
+    };
+  },
+  methods: {
+    clickNav(navTab) {
+      return (this.nav = navTab);
+    },
+    navActive() {
+      return this.nav;
+    }
+  }
+};
+</script>
 
 <style>
 #app {
@@ -15,18 +50,5 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
 }
 </style>
